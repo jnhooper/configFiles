@@ -1,5 +1,10 @@
 # configFiles
 
+## setup vim
+- install vim plug https://github.com/junegunn/vim-plug#unix
+- install pathogen https://github.com/tpope/vim-pathogen#installation
+
+
 ## starship
 https://starship.rs/config/
 
