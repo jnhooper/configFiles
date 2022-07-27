@@ -12,3 +12,9 @@ https://starship.rs/config/
 
 `mkdir -p ~/.config && touch ~/.config/starship.toml`
 copy `starship.toml` into that file
+
+## vimmode in vscode
+to [enable scrolling](https://knowledgebase.constantcontact.com/articles/KnowledgeBase/12509-Mac-Vertical-Scroll-Bars-Missing-From-Toolbar?lang=en_US) by holding k or j
+```
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+```
