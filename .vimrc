@@ -12,6 +12,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+" comments
+Plug 'preservim/nerdcommenter'
 " theme
 Plug 'haishanh/night-owl.vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
