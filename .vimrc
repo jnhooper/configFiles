@@ -24,6 +24,9 @@ call plug#end()
 " You just always do this. It has to do w/ vi compatability maybe
 set nocompatible
 
+"turn on relative line numbers
+set relativenumber
+
 set term=xterm-256color
 " theme
 if has('termguicolors')
