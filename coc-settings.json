@@ -1,0 +1,4 @@
+{
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": true,
+  "eslint.autoFixOnSave": true
+}
