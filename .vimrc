@@ -6,47 +6,135 @@ Plug 'neomake/neomake'
 " https://pragmaticpineapple.com/ultimate-vim-typescript-setup/
 Plug 'pangloss/vim-javascript'    " JavaScript support
 Plug 'leafgarland/typescript-vim' " TypeScript syntax
+"Plug 'HerringtonDarkholme/yats'
 Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 Plug 'jparise/vim-graphql'        " GraphQL syntax
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" git support
+Plug 'tpope/vim-fugitive'
+
+" status bar
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+"Plug 'feline-nvim/feline.nvim'
+"Plug 'nanozuki/tabby.nvim'
+
+" git gutter
+Plug 'airblade/vim-gitgutter'
+
 "fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
+Plug 'mileszs/ack.vim'
+
+Plug 'tpope/vim-surround'
+
 " comments
 Plug 'preservim/nerdcommenter'
-" theme
-Plug 'haishanh/night-owl.vim'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'artanikin/vim-synthwave84'
-Plug 'drewtempelmeyer/palenight.vim'
+
+" themes
+"Plug 'haishanh/night-owl.vim'
+"Plug 'dracula/vim', { 'as': 'dracula' }
+"Plug 'artanikin/vim-synthwave84'
+"Plug 'drewtempelmeyer/palenight.vim'
+"Plug 'aperezdc/vim-elrond' 
+"Plug 'davidbachmann/vim-punk-colorscheme'
+Plug 'EdenEast/nightfox.nvim'
+
+Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
+Plug 'kyazdani42/nvim-tree.lua'
+
+" leap around files. this overrides s and S
+Plug 'ggandor/leap.nvim'
+
+" camel case navivgation
+Plug 'bkad/CamelCaseMotion'
+
 call plug#end()
 
 " You just always do this. It has to do w/ vi compatability maybe
 set nocompatible
 
-"turn on relative line numbers
+" turn on relative numbers
 set relativenumber
 
-set term=xterm-256color
-" theme
-if has('termguicolors')
-    set termguicolors
+let g:NERDSpaceDelims = 1
+
+if !has('nvim')
+  set term=xterm-256color
 endif
+
+let g:camelcasemotion_key = '<leader>'
+" theme
+"if has('termguicolors')
+    set termguicolors
+"endif
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 """"" enable the theme
 syntax enable
 set background=dark
 "colorscheme night-owl
 "colorscheme dracula
-" colorscheme synthwave84
-" colorscheme palenight
-colorscheme desert
+ "colorscheme synthwave84
+ colorscheme carbonfox
+ "colorscheme nightfox
+"colorscheme palenight
+"colorscheme desert
+"colorscheme asdf
+"colorscheme elrond
+"colorscheme punk
+"colorscheme pop-punk
+
+"""""" airline settings
+"let g:airline_theme='behelit'
+let g:airline_theme='base16_shapeshifter'
+
+" just for fun
+"let g:airline_section_c = '🎸 %F'
+"
+" air-line
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#whitespace#mixed_indent_algo = 1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
 
 
 " https://pragmaticpineapple.com/improving-vim-workflow-with-fzf/
 " remap fzf ctrl-p
 nnoremap <C-p> :GFiles<Cr>
 
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 " silver searcher
 nnoremap <C-g> :Ag<Cr>
 
@@ -59,8 +147,13 @@ set showcmd
 " Use space as leader key
 map <Space> <Leader>
 " I write and quit a lot, so aliases that don't require an <Enter> are nice
-nnoremap <Leader>w :w<CR>
+"nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
+
+nnoremap <Leader>t :NvimTreeToggle<CR>
+
+" copy into * buffer which is used for clipboard
+vnoremap <Leader>y "*y<CR>
 
 " Enter 'jj' in insert mode to return to normal mode
 inoremap jj <ESC>
@@ -136,7 +229,7 @@ filetype indent on
 
 " Language-specific
 autocmd FileType html,ruby,eruby,css,scss setlocal sw=2 ts=2 tw=0
-autocmd FileType javascript,javascript.jsx,typescript,typescript.tsx setlocal sw=2 sts=2 ts=2 tw=100 et
+autocmd FileType javascript,javascript.jsx,typescript,typescript.tsx,markdown setlocal sw=2 sts=2 ts=2 tw=100 et
 
 " Automatic text wrapping at col 80 for git commits
 autocmd FileType gitcommit setlocal tw=80 colorcolumn=81
@@ -148,6 +241,14 @@ let g:ctrlp_root_markers = ['package.json']
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " CONFIGURE COC
+
+" CoC extensions
+let g:coc_global_extensions = ['coc-tsserver', 'coc-json']
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+  let g:coc_global_extensions += ['coc-eslint']
+endif
+
 " Some servers have issues with backup files, see #649.
 set nobackup
 set nowritebackup
@@ -223,7 +324,7 @@ nmap <leader>f  <Plug>(coc-format-selected)
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  autocmd FileType typescript,typescript.tsx,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder.
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
@@ -252,14 +353,15 @@ omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
-" Remap <C-f> and <C-b> for scroll float windows/popups.
+" Remap <C-f> and <C-c> for scroll float windows/popups.
+" this used to remap <C-b> but that was interferring with my :tabP remap
 if has('nvim-0.4.0') || has('patch-8.2.0750')
   nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  nnoremap <silent><nowait><expr> <C-c> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-c>"
   inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  inoremap <silent><nowait><expr> <C-c> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
   vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  vnoremap <silent><nowait><expr> <C-c> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-c>"
 endif
 
 " Use CTRL-S for selections ranges.
@@ -285,9 +387,9 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+"nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
 nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
@@ -301,22 +403,22 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " END COC CONFIG
 
 " configure neomake to use local eslint
-autocmd! BufWritePost * Neomake
-let g:neomake_javascript_eslint_maker = {
-    \ 'exe': 'node_modules/.bin/eslint',
-    \ 'args': ['-f', 'compact'],
-    \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
-    \ '%W%f: line %l\, col %c\, Warning - %m'
-    \ }
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_warning_sign = {
-  \ 'text': 'W',
-  \ 'texthl': 'WarningMsg',
-  \ }
-let g:neomake_error_sign = {
-  \ 'text': 'E',
-  \ 'texthl': 'ErrorMsg',
-  \ }
+"autocmd! BufWritePost * Neomake
+"let g:neomake_javascript_eslint_maker = {
+    "\ 'exe': 'node_modules/.bin/eslint',
+    "\ 'args': ['-f', 'compact'],
+    "\ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+    "\ '%W%f: line %l\, col %c\, Warning - %m'
+    "\ }
+"let g:neomake_javascript_enabled_makers = ['eslint']
+"let g:neomake_warning_sign = {
+  "\ 'text': 'W',
+  "\ 'texthl': 'WarningMsg',
+  "\ }
+"let g:neomake_error_sign = {
+  "\ 'text': 'E',
+  "\ 'texthl': 'ErrorMsg',
+  "\ }
 
 " jump to next error in location list with <Leader> e
 nnoremap <Leader>e :lnext<CR>
