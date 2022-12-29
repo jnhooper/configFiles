@@ -1,8 +1,9 @@
 # configFiles
 
-## install neovim
+## install neovim and setup config
 - make a `nvim` folder in your `~/.config` folder
 - copy the `init.vim` file
+- add `coc-settings.json` in the same config folder and copy the contents found here
 
 ## setup vim
 - install vim plug https://github.com/junegunn/vim-plug#unix
