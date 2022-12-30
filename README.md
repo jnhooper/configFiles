@@ -19,6 +19,7 @@ https://pragmaticpineapple.com/ultimate-vim-typescript-setup/
 - make a `nvim` folder in your `~/.config` folder
 - copy the `init.vim` file
 - add `coc-settings.json` in the same config folder and copy the contents found here
+- install silver searcher https://github.com/ggreer/the_silver_searcher
 some plugins require at least neovim v0.8 which is NOT the default on ubuntu, so some manual installation might be needed.
 [this](https://linuxopsys.com/topics/install-neovim-ubuntu-and-plugins) was useful
  
