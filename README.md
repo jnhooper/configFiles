@@ -1,10 +1,5 @@
 # configFiles
 
-## install neovim and setup config
-- make a `nvim` folder in your `~/.config` folder
-- copy the `init.vim` file
-- add `coc-settings.json` in the same config folder and copy the contents found here
-
 ## setup vim
 - install vim plug https://github.com/junegunn/vim-plug#unix
 - install pathogen https://github.com/tpope/vim-pathogen#installation
@@ -14,7 +9,19 @@ using https://github.com/neoclide/coc.nvim under the hood for TS. heavily influe
 https://github.com/neoclide/coc.nvim#example-vim-configuration
 and 
 https://pragmaticpineapple.com/ultimate-vim-typescript-setup/
+ 
+## install a font
+ https://github.com/powerline/fonts#quick-installation
+ or 
+ https://www.nerdfonts.com/
 
+## install neovim and setup config
+- make a `nvim` folder in your `~/.config` folder
+- copy the `init.vim` file
+- add `coc-settings.json` in the same config folder and copy the contents found here
+some plugins require at least neovim v0.8 which is NOT the default on ubuntu, so some manual installation might be needed.
+[this](https://linuxopsys.com/topics/install-neovim-ubuntu-and-plugins) was useful
+ 
 
 ## starship
 https://starship.rs/config/
