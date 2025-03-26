@@ -32,6 +32,13 @@ https://starship.rs/config/
 `mkdir -p ~/.config && touch ~/.config/starship.toml`
 copy `starship.toml` into that file
 
+## eza
+https://github.com/eza-community/eza
+
+## zsh tools
+https://github.com/marlonrichert/zsh-autocomplete
+https://github.com/zsh-users/zsh-autosuggestions
+
 ## vimmode in vscode
 to [enable scrolling](https://knowledgebase.constantcontact.com/articles/KnowledgeBase/12509-Mac-Vertical-Scroll-Bars-Missing-From-Toolbar?lang=en_US) by holding k or j
 ```
