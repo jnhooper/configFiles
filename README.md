@@ -37,7 +37,10 @@ https://github.com/eza-community/eza
 
 ## zsh tools
 https://github.com/marlonrichert/zsh-autocomplete
+
 https://github.com/zsh-users/zsh-autosuggestions
+
+https://github.com/alexpasmantier/television?tab=readme-ov-file
 
 ## vimmode in vscode
 to [enable scrolling](https://knowledgebase.constantcontact.com/articles/KnowledgeBase/12509-Mac-Vertical-Scroll-Bars-Missing-From-Toolbar?lang=en_US) by holding k or j
